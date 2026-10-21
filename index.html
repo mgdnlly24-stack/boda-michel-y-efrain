@@ -3,245 +3,524 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda de Miches & Efraín</title>
-    <!-- Fuentes Elegantes de Google Fonts -->
+    <title>Boda de Michel & Efraín — Invitación Oficial</title>
+    <!-- Google Fonts inspiradas en la Guía Tipográfica (Great Vibes, Cormorant Garamond, Montserrat) -->
     <link href="[suspicious link removed]" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #fdfbf7;
-            --primary: #c5a059; /* Dorado elegante */
-            --dark-text: #2c2c2c;
-            --light-bg: #f5efe6;
-            --alert-bg: #f9f1f0;
-            --alert-border: #d9aab0;
+            --bg-paper: #fbf7f0;
+            --card-bg: #ffffff;
+            --primary-gold: #c5a059;
+            --gold-dark: #a37f3e;
+            --text-dark: #4a3525;
+            --text-muted: #7a6352;
+            --blush-accent: #d9a79a;
+            --blush-light: #f7ebe8;
             --whatsapp-green: #25d366;
-            --font-title: 'Cormorant Garamond', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --cancel-red: #d9534f;
+            --font-script: 'Great Vibes', cursive;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--dark-text);
-            font-family: var(--font-body);
+            background-color: #2c221e;
+            color: var(--text-dark);
+            font-family: var(--font-sans);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 0;
+            margin: 0;
         }
 
-        .container {
+        .app-viewport {
             width: 100%;
             max-width: 480px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background-color: var(--bg-paper);
+            min-height: 100vh;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow-x: hidden;
         }
 
-        /* Detalle Floral Sutil en Esquinas */
-        .corner-flower {
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-        .top-left { top: 10px; left: 10px; border-top: 2px solid var(--primary); border-left: 2px solid var(--primary); }
-        .top-right { top: 10px; right: 10px; border-top: 2px solid var(--primary); border-right: 2px solid var(--primary); }
-        .bottom-left { bottom: 10px; left: 10px; border-bottom: 2px solid var(--primary); border-left: 2px solid var(--primary); }
-        .bottom-right { bottom: 10px; right: 10px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); }
-
-        .section {
-            padding: 40px 25px;
-            text-align: center;
-            border-bottom: 1px solid #f0e8dd;
-        }
-
-        .monogram {
-            font-family: var(--font-title);
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+        /* SOBRE VIRTUAL INTERACTIVO CON SELLO DE CERA */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            background: radial-gradient(circle, #3a2b25 0%, #1f1814 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
         }
 
-        h1 {
-            font-family: var(--font-title);
-            font-size: 2.4rem;
-            font-weight: 600;
-            color: var(--dark-text);
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #777;
-            margin-bottom: 20px;
-        }
-
-        .date-box {
-            font-family: var(--font-title);
-            font-size: 1.6rem;
-            color: var(--primary);
-            border-top: 1px solid var(--primary);
-            border-bottom: 1px solid var(--primary);
-            padding: 10px 0;
-            margin: 20px auto;
-            width: 80%;
-        }
-
-        /* Cronómetro */
-        .countdown {
+        .envelope-wrapper {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #f3eae1;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .time-card {
-            background: var(--light-bg);
-            padding: 10px 14px;
-            border-radius: 8px;
-            min-width: 65px;
-        }
-        .time-card span {
-            display: block;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        .time-card small {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            color: #666;
+            align-items: center;
+            border: 2px solid #e2d1c3;
+            perspective: 1000px;
         }
 
-        /* Botones generales */
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid #e8dbce;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            z-index: 3;
+        }
+
+        .wax-seal {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            background: radial-gradient(circle, #d49a4b 0%, #a6722e 100%);
+            border-radius: 50%;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            border: 3px solid #8e5d20;
+            animation: pulse-seal 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .wax-seal:hover { transform: scale(1.08); }
+
+        .wax-seal-inner {
+            width: 58px;
+            height: 58px;
+            border: 1px dashed #fce8c8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-script);
+            font-size: 1.6rem;
             color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        @keyframes pulse-seal {
+            0% { box-shadow: 0 0 0 0 rgba(200, 141, 63, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(200, 141, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(200, 141, 63, 0); }
+        }
+
+        .envelope-instruction {
+            color: #d9c5b2;
             font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+            margin-top: 35px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+            animation: fadeInOut 2s infinite;
         }
 
-        .btn-whatsapp {
-            background-color: var(--whatsapp-green);
-            font-size: 1rem;
-            padding: 14px 28px;
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
-        /* Tarjetas de eventos */
-        .card {
-            background-color: var(--light-bg);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+        #envelope-overlay.opened .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        #envelope-overlay.opened {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* REPRODUCTOR FLOTANTE DE MÚSICA */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(197, 160, 89, 0.9);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            font-size: 1.2rem;
+        }
+        .music-btn.playing {
+            animation: spin 4s linear infinite;
+            background-color: var(--gold-dark);
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .section {
+            padding: 40px 24px;
             text-align: center;
+            border-bottom: 1px dashed var(--primary-gold);
+            position: relative;
         }
-        .card h3 {
-            font-family: var(--font-title);
-            font-size: 1.5rem;
-            color: var(--primary);
+
+        .pill-badge {
+            display: inline-block;
+            background-color: var(--blush-light);
+            color: var(--text-dark);
+            border: 1px solid var(--blush-accent);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .script-hero {
+            font-family: var(--font-script);
+            font-size: 3.8rem;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin: 10px 0;
+            font-weight: normal;
+        }
+
+        .serif-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
-        /* Itinerario */
-        .timeline {
-            text-align: left;
-            margin-top: 20px;
-            padding-left: 10px;
-        }
-        .item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        .time {
-            font-weight: 600;
-            color: var(--primary);
-            width: 80px;
-            font-size: 0.9rem;
-        }
-        .desc {
-            font-size: 0.85rem;
-            color: #444;
-        }
-
-        /* Alerta de vestimenta */
-        .alert-box {
-            background-color: var(--alert-bg);
-            border: 1px solid var(--alert-border);
-            padding: 15px;
-            border-radius: 10px;
+        .sub-header {
             font-size: 0.8rem;
-            color: #8a3b43;
-            margin: 15px 0;
-            line-height: 1.4;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .palette {
+        .heart-divider {
+            color: var(--blush-accent);
+            font-size: 1rem;
+            margin: 14px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .heart-divider::before, .heart-divider::after {
+            content: "";
+            height: 1px;
+            width: 45px;
+            background-color: var(--primary-gold);
+        }
+
+        .date-banner {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            border-top: 1px solid var(--primary-gold);
+            border-bottom: 1px solid var(--primary-gold);
+            padding: 10px 0;
+            margin: 20px 0;
+            letter-spacing: 1.5px;
+        }
+
+        .countdown-grid {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
-        .color-circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .time-card {
+            background: #ffffff;
+            border: 1px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 10px 8px;
+            min-width: 68px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .time-card span {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            font-family: var(--font-serif);
+        }
+        .time-card small {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
 
-        footer {
-            padding: 20px;
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ebdccb;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             text-align: center;
-            font-size: 0.75rem;
-            color: #888;
-            background-color: #faf7f2;
+        }
+        .card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--gold-dark);
+            color: #ffffff;
+            padding: 12px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { opacity: 0.92; transform: translateY(-2px); }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--primary-gold);
+        }
+
+        .timeline { text-align: left; margin-top: 15px; }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dotted var(--primary-gold);
+        }
+        .timeline-item:last-child { border-bottom: none; }
+        .time {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--gold-dark);
+            width: 85px;
+            flex-shrink: 0;
+        }
+        .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .tab-btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-gold);
+            background: #fff;
+            color: var(--text-dark);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background-color: var(--blush-accent);
+            color: #fff;
+            border-color: var(--blush-accent);
+        }
+        .tab-content { display: none; text-align: left; background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 15px; font-size: 0.83rem; color: #555; }
+        .tab-content.active { display: block; }
+
+        .alert-box {
+            background-color: #fdf3f2;
+            border: 1px solid #f2c8c5;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            color: #8c3836;
+            margin: 15px 0;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .palette { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+        .color-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+
+        .rsvp-form {
+            background: #ffffff;
+            border: 1px solid var(--primary-gold);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcd0c0;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: #faf7f2;
+        }
+
+        .btn-rsvp-yes {
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            text-align: center;
+        }
+        .btn-rsvp-no {
+            background-color: var(--cancel-red);
+            color: #ffffff;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(217, 83, 79, 0.25);
+            text-align: center;
+        }
+        .btn-subtext {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2c221e;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.82rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10000;
+            transition: transform 0.4s ease;
+        }
+        #[se quitó el vínculo sospechoso] { transform: translateX(-50%) translateY(0); }
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background-color: var(--bg-paper);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Detalles florales geométricos -->
-    <div class="corner-flower top-left"></div>
-    <div class="corner-flower top-right"></div>
-    <div class="corner-flower bottom-left"></div>
-    <div class="corner-flower bottom-right"></div>
+<div class="app-viewport">
 
-    <!-- PORTADA -->
-    <div class="section">
-        <div class="monogram">M & E</div>
-        <p class="subtitle">NUESTRA BODA</p>
-        <h1>Miches & Efraín</h1>
-        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Tenemos el honor de invitarte a celebrar nuestro enlace matrimonial.</p>
-        
-        <div class="date-box">
-            SÁBADO, 10 DE ABRIL
+    <!-- SOBRE VIRTUAL INTERACTIVO CON SELLO DE CERA -->
+    <div id="envelope-overlay">
+        <div class="envelope-wrapper">
+            <div class="envelope-flap"></div>
+            <div class="wax-seal" onclick="openEnvelope()">
+                <div class="wax-seal-inner">M & E</div>
+            </div>
         </div>
+        <p class="envelope-instruction">Toca el sello para abrir la invitación</p>
+    </div>
 
-        <div class="countdown" id="countdown">
+    <!-- REPRODUCTOR DE MÚSICA -->
+    <div class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Música de Fondo">🎵</div>
+    <audio id="bgAudio" loop></audio>
+
+    <!-- PORTADA / HERO -->
+    <div class="section">
+        <div class="pill-badge">Nuestra Boda</div>
+        <p class="sub-header">¡NOS CASAMOS!</p>
+        <div class="script-hero">Michel & Efraín</div>
+        <div class="heart-divider">♥</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 5px;">Con la bendición de Dios y de nuestros padres, tenemos el honor de invitarte a compartir la alegría de nuestro enlace matrimonial.</p>
+        
+        <div class="date-banner">SÁBADO, 10 DE ABRIL DE 2027</div>
+
+        <button class="btn btn-outline" onclick="addToCalendar()" style="margin-bottom: 15px;">
+            📅 Agendar en Google Calendar
+        </button>
+
+        <div class="countdown-grid">
             <div class="time-card"><span id="days">00</span><small>Días</small></div>
             <div class="time-card"><span id="hours">00</span><small>Horas</small></div>
             <div class="time-card"><span id="minutes">00</span><small>Min</small></div>
@@ -251,108 +530,185 @@
 
     <!-- UBICACIONES -->
     <div class="section">
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 20px;">Ubicaciones</h2>
+        <div class="pill-badge">Ubicaciones</div>
+        <div class="serif-title">Dónde & Cuándo</div>
+        <div class="heart-divider">♥</div>
 
         <div class="card">
+            <div style="font-size: 1.8rem; margin-bottom: 8px;">⛪</div>
             <h3>Ceremonia Religiosa</h3>
-            <p style="font-weight: 500; font-size: 0.9rem;">Catedral</p>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Horario: 17:00 hrs</p>
-            <!-- Puedes reemplazar # por el link exacto de Google Maps de la Catedral -->
-            <a href="[suspicious link removed]" target="_blank" class="btn">📍 Ver en Google Maps</a>
+            <p style="font-weight: 600; font-size: 0.92rem;">Catedral</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Horario: 17:00 hrs</p>
+            <button class="btn" onclick="openMap('catedral')">📍 Ver en Google Maps</button>
         </div>
 
         <div class="card">
+            <div style="font-size: 1.8rem; margin-bottom: 8px;">🥂</div>
             <h3>Recepción</h3>
-            <p style="font-weight: 500; font-size: 0.9rem;">Salón de Eventos</p>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Horario: 19:30 hrs</p>
-            <!-- Puedes reemplazar # por el link exacto de Google Maps del Salón -->
-            <a href="[suspicious link removed]" target="_blank" class="btn">📍 Ver en Google Maps</a>
+            <p style="font-weight: 600; font-size: 0.92rem;">Salón de Eventos</p>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Horario: 19:30 hrs</p>
+            <button class="btn" onclick="openMap('salon')">📍 Ver en Google Maps</button>
         </div>
     </div>
 
     <!-- ITINERARIO -->
     <div class="section">
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px;">Itinerario</h2>
+        <div class="pill-badge">Itinerario</div>
+        <div class="serif-title">Programa del Día</div>
+        <div class="heart-divider">♥</div>
         
         <div class="timeline">
-            <div class="item"><span class="time">16:30 hrs</span><span class="desc">Llegada de invitados a la Catedral</span></div>
-            <div class="item"><span class="time">17:00 hrs</span><span class="desc">Ceremonia Religiosa</span></div>
-            <div class="item"><span class="time">18:30 hrs</span><span class="desc">Traslado y sesión de fotos</span></div>
-            <div class="item"><span class="time">19:30 hrs</span><span class="desc">Coctel de Bienvenida en el Salón</span></div>
-            <div class="item"><span class="time">20:30 hrs</span><span class="desc">Entrada de los Novios y Primer Baile</span></div>
-            <div class="item"><span class="time">21:00 hrs</span><span class="desc">Cena Banquetera</span></div>
-            <div class="item"><span class="time">22:30 hrs</span><span class="desc">Apertura de Pista & Fiesta</span></div>
-            <div class="item"><span class="time">01:00 hrs</span><span class="desc">Mariachi y Trasnochados</span></div>
+            <div class="timeline-item"><span class="time">16:30 hrs</span><span class="desc"><strong>Llegada de invitados</strong> a la Catedral</span></div>
+            <div class="timeline-item"><span class="time">17:00 hrs</span><span class="desc"><strong>Ceremonia Religiosa</strong> Matrimonial</span></div>
+            <div class="timeline-item"><span class="time">18:30 hrs</span><span class="desc"><strong>Sesión de fotos</strong> & Traslado al Salón</span></div>
+            <div class="timeline-item"><span class="time">19:30 hrs</span><span class="desc"><strong>Coctel de Bienvenida</strong> en jardines</span></div>
+            <div class="timeline-item"><span class="time">20:30 hrs</span><span class="desc"><strong>Entrada de los Novios</strong> & Primer Baile</span></div>
+            <div class="timeline-item"><span class="time">21:00 hrs</span><span class="desc"><strong>Cena Banquetera</strong> de Tres Tiempos</span></div>
+            <div class="timeline-item"><span class="time">22:30 hrs</span><span class="desc"><strong>Apertura de Pista</strong> & Gran Fiesta</span></div>
+            <div class="timeline-item"><span class="time">01:00 hrs</span><span class="desc"><strong>Mariachi</strong> & Trasnochados</span></div>
         </div>
     </div>
 
     <!-- MESA DE REGALOS -->
     <div class="section">
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px;">Mesa de Regalos</h2>
-        <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">Su presencia es nuestro mejor regalo. Si desean hacernos un obsequio, ponemos a su disposición las siguientes opciones:</p>
+        <div class="pill-badge">Regalos</div>
+        <div class="serif-title">Mesa de Regalos</div>
+        <div class="heart-divider">♥</div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Tu presencia es nuestro mejor regalo. Si deseas realizarnos un detalle, ponemos a tu disposición:</p>
 
-        <div class="card" style="background: #fff; border: 1px solid #e5dccb;">
-            <p style="font-weight: 600; font-size: 0.95rem;">Liverpool</p>
-            <p style="font-size: 0.8rem; color: #666;">Evento No. <strong>50123456</strong></p>
-            <a href="[suspicious link removed]" target="_blank" class="btn" style="padding: 8px 18px; font-size: 0.75rem;">Ir a Liverpool</a>
+        <div class="card">
+            <h3>Liverpool</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Evento No. <strong id="liverpoolEvent">50123456</strong></p>
+            <button class="btn" onclick="copyToClipboard('50123456', 'Número de evento de Liverpool copiado')">📋 Copiar Evento</button>
+            <button class="btn btn-outline" onclick="openLiverpool()" style="margin-left: 5px;">Ir a Liverpool</button>
         </div>
 
-        <div class="card" style="background: #fff; border: 1px solid #e5dccb;">
-            <p style="font-weight: 600; font-size: 0.95rem;">Lluvia de Sobres / Transferencia</p>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Habrá un buzón especial el día del evento.<br><strong>CLABE:</strong> 012 180 0123456789 0<br><strong>Banco:</strong> BBVA</p>
+        <div class="card">
+            <h3>Lluvia de Sobres / Transferencia</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Contaremos con buzón para sobres el día del evento.</p>
+            <hr style="border: 0; border-top: 1px dashed #e2d1c3; margin: 10px 0;">
+            <p style="font-size: 0.8rem; color: #555;"><strong>Banco:</strong> BBVA<br><strong>CLABE:</strong> <span id="clabeNum">012180012345678901</span></p>
+            <button class="btn" onclick="copyToClipboard('012180012345678901', 'CLABE bancaria copiada')">📋 Copiar CLABE</button>
         </div>
     </div>
 
-    <!-- CÓDIGO DE VESTIMENTA -->
+    <!-- DRESS CODE -->
     <div class="section">
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 10px;">Código de Vestimenta</h2>
-        <p style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">ETIQUETA FORMAL</p>
+        <div class="pill-badge">Dress Code</div>
+        <div class="serif-title">Etiqueta Formal</div>
+        <div class="heart-divider">♥</div>
 
-        <a href="[suspicious link removed]" target="_blank" class="btn" style="background-color: #7a6352; margin-bottom: 15px;">👗 Inspiración de Vestidos</a>
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('mujeres')">👗 Mujeres</button>
+            <button class="tab-btn" onclick="switchTab('hombres')">👔 Hombres</button>
+        </div>
+
+        <div id="tab-mujeres" class="tab-content active">
+            <p><strong>Recomendación Mujeres:</strong> Vestido largo de noche o traje formal elegante. Telas fluidas y accesorios acordes a la ocasión.</p>
+        </div>
+        <div id="tab-hombres" class="tab-content">
+            <p><strong>Recomendación Hombres:</strong> Traje formal oscuro o smoking, camisa de vestir, corbata o moño y calzado formal.</p>
+        </div>
 
         <div class="alert-box">
-            <strong>⚠️ Recordatorio Importante:</strong><br>
-            Agradecemos evitar vestir en tonos <strong>blanco, hueso, marfil, crema, champagne claro</strong> o sus derivados. Estos colores están reservados para la novia.
+            <strong>⚠️ OMISIÓN DE COLORES PARA INVITADOS:</strong><br>
+            Agradecemos de corazón evitar vestir en tonos <strong>blanco, hueso, marfil, crema o champagne claro</strong>. Estos colores quedan estrictamente reservados para la novia.
         </div>
 
-        <p style="font-size: 0.8rem; color: #555; margin-top: 15px;">Sugerencias de paleta de colores:</p>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px;">Paleta de colores sugerida:</p>
         <div class="palette">
-            <div class="color-circle" style="background-color: #d8a7a1;" title="Palo de Rosa"></div>
-            <div class="color-circle" style="background-color: #556b2f;" title="Verde Olivo"></div>
-            <div class="color-circle" style="background-color: #c86d51;" title="Terracota"></div>
-            <div class="color-circle" style="background-color: #1b2a4a;" title="Azul Noche"></div>
+            <div class="color-dot" style="background-color: #d8a7a1;" title="Palo de Rosa"></div>
+            <div class="color-dot" style="background-color: #556b2f;" title="Verde Olivo"></div>
+            <div class="color-dot" style="background-color: #c86d51;" title="Terracota"></div>
+            <div class="color-dot" style="background-color: #1b2a4a;" title="Azul Noche"></div>
         </div>
     </div>
 
-    <!-- RSVP / WhatsApp -->
-    <div class="section" style="border-bottom: none;">
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 10px;">Confirmación de Asistencia</h2>
-        <p style="font-size: 0.85rem; color: #555; margin-bottom: 20px;">Por favor confirma tu asistencia antes del 15 de Marzo.</p>
+    <!-- RSVP DOBLE WHATSAPP -->
+    <div class="section">
+        <div class="pill-badge">RSVP</div>
+        <div class="serif-title">Confirmación de Asistencia</div>
+        <div class="heart-divider">♥</div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Por favor completa tus datos y selecciona tu respuesta para enviar el mensaje automático por WhatsApp:</p>
 
-        <!-- Reemplaza el enlace si deseas poner un número específico, por ejemplo: [suspicious link removed]... -->
-        <a href="[suspicious link removed]." target="_blank" class="btn btn-whatsapp">
-            📲 Confirmar por WhatsApp
-        </a>
+        <div class="rsvp-form">
+            <div class="form-group">
+                <label for="guestName">Nombre(s) del Invitado / Familia:</label>
+                <input type="text" id="guestName" class="form-control" placeholder="Ej. Familia Rodríguez o María López">
+            </div>
+
+            <div class="form-group">
+                <label for="guestPasses">Número de pases a confirmar:</label>
+                <select id="guestPasses" class="form-control">
+                    <option value="1">1 Pase</option>
+                    <option value="2" selected>2 Pases</option>
+                    <option value="3">3 Pases</option>
+                    <option value="4">4 Pases</option>
+                    <option value="5">5 Pases</option>
+                </select>
+            </div>
+
+            <!-- BOTÓN 1: SÍ ASISTIRÉ (Abre WhatsApp de Michel) -->
+            <!-- Sustituye NUMERO_MICHEL por su número a 10 dígitos con clave de país (ejemplo: 5215512345678) -->
+            <button class="btn-rsvp-yes" onclick="sendRSVP('yes', 'NUMERO_MICHEL')">
+                ✅ ¡Sí asistiré!
+                <span class="btn-subtext">(Mensaje automático al WhatsApp de Michel)</span>
+            </button>
+
+            <!-- BOTÓN 2: NO PODRÉ ASISTIR (Abre WhatsApp de Efraín) -->
+            <!-- Sustituye NUMERO_EFRAIN por su número a 10 dígitos con clave de país (ejemplo: 5215587654321) -->
+            <button class="btn-rsvp-no" onclick="sendRSVP('no', 'NUMERO_EFRAIN')">
+                ❌ No podré asistir
+                <span class="btn-subtext">(Mensaje automático al WhatsApp de Efraín)</span>
+            </button>
+        </div>
     </div>
 
     <footer>
-        <p>Con amor, Miches & Efraín ❤️</p>
+        <p>Con todo nuestro amor,<br><strong style="font-family: var(--font-script); font-size: 1.5rem; color: var(--gold-dark);">Michel & Efraín</strong> ❤️</p>
     </footer>
+
 </div>
 
-<script>
-    // Cuenta Regresiva para el 10 de Abril
-    const targetDate = new Date("April 10, 2027 17:00:00").getTime();
+<div id="toast">¡Copiado al portapapeles!</div>
 
+<script>
+    function openEnvelope() {
+        const overlay = document.getElementById('envelope-overlay');
+        overlay.classList.add('opened');
+    }
+
+    function toggleMusic() {
+        const musicBtn = document.getElementById('musicBtn');
+        musicBtn.classList.toggle('playing');
+        showToast("Música activada / pausada");
+    }
+
+    function addToCalendar() {
+        const calUrl = "https:" + "//[suspicious link removed]";
+        [se quitó el vínculo sospechoso](calUrl, '_blank');
+    }
+
+    function openMap(place) {
+        const mapUrl = "https:" + "//[suspicious link removed]";
+        [se quitó el vínculo sospechoso](mapUrl, '_blank');
+    }
+
+    function openLiverpool() {
+        const livUrl = "https:" + "//[se quitó el vínculo sospechoso]";
+        [se quitó el vínculo sospechoso](livUrl, '_blank');
+    }
+
+    const targetDate = new Date("April 10, 2027 17:00:00").getTime();
     function updateCountdown() {
         const now = new Date().getTime();
-        const difference = targetDate - now;
+        const diff = targetDate - now;
 
-        if (difference > 0) {
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
             document.getElementById("days").innerText = days < 10 ? "0" + days : days;
             document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
@@ -360,9 +716,67 @@
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
         }
     }
-
     setInterval(updateCountdown, 1000);
     updateCountdown();
+
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        if(tab === 'mujeres') {
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            document.getElementById('tab-mujeres').classList.add('active');
+        } else {
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            document.getElementById('tab-hombres').classList.add('active');
+        }
+    }
+
+    function copyToClipboard(text, msg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(msg);
+            }).catch(() => {
+                fallbackCopy(text, msg);
+            });
+        } else {
+            fallbackCopy(text, msg);
+        }
+    }
+
+    function fallbackCopy(text, msg) {
+        const temp = document.createElement("input");
+        temp.value = text;
+        document.body.appendChild(temp);
+        [se quitó el vínculo sospechoso]();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showToast(msg);
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.innerText = msg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    function sendRSVP(type, phone) {
+        const name = document.getElementById("guestName").value.trim() || "Invitado Especial";
+        const passes = document.getElementById("guestPasses").value;
+        let text = "";
+
+        if (type === 'yes') {
+            text = `¡Hola Michel! 🥳 Con mucho gusto confirmo mi asistencia a su boda. Mi nombre es: ${name} y confirmamos ${passes} pases. ¡Nos vemos el 10 de Abril!`;
+        } else {
+            text = `¡Hola Efraín! 🙃 Lamento mucho informar que no podremos asistir a su boda. Les deseamos lo mejor en su gran día. Un saludo con cariño de parte de: ${name}`;
+        }
+
+        const encodedText = encodeURIComponent(text);
+        const waBase = "https:" + "//" + "[se quitó el vínculo sospechoso]";
+        const waUrl = `${waBase}${phone}?text=${encodedText}`;
+        [se quitó el vínculo sospechoso](waUrl, '_blank');
+    }
 </script>
 
 </body>
