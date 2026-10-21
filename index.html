@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Miches & Efraín</title>
+    <!-- Fuentes Elegantes de Google Fonts -->
+    <link href="[suspicious link removed]" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --primary: #c5a059; /* Dorado elegante */
+            --dark-text: #2c2c2c;
+            --light-bg: #f5efe6;
+            --alert-bg: #f9f1f0;
+            --alert-border: #d9aab0;
+            --whatsapp-green: #25d366;
+            --font-title: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--dark-text);
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Detalle Floral Sutil en Esquinas */
+        .corner-flower {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .top-left { top: 10px; left: 10px; border-top: 2px solid var(--primary); border-left: 2px solid var(--primary); }
+        .top-right { top: 10px; right: 10px; border-top: 2px solid var(--primary); border-right: 2px solid var(--primary); }
+        .bottom-left { bottom: 10px; left: 10px; border-bottom: 2px solid var(--primary); border-left: 2px solid var(--primary); }
+        .bottom-right { bottom: 10px; right: 10px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); }
+
+        .section {
+            padding: 40px 25px;
+            text-align: center;
+            border-bottom: 1px solid #f0e8dd;
+        }
+
+        .monogram {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .date-box {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            color: var(--primary);
+            border-top: 1px solid var(--primary);
+            border-bottom: 1px solid var(--primary);
+            padding: 10px 0;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        /* Cronómetro */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .time-card {
+            background: var(--light-bg);
+            padding: 10px 14px;
+            border-radius: 8px;
+            min-width: 65px;
+        }
+        .time-card span {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .time-card small {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        /* Botones generales */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-green);
+            font-size: 1rem;
+            padding: 14px 28px;
+        }
+
+        /* Tarjetas de eventos */
+        .card {
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .card h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        /* Itinerario */
+        .timeline {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+        .item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .time {
+            font-weight: 600;
+            color: var(--primary);
+            width: 80px;
+            font-size: 0.9rem;
+        }
+        .desc {
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        /* Alerta de vestimenta */
+        .alert-box {
+            background-color: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: #8a3b43;
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+
+        .palette {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .color-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #888;
+            background-color: #faf7f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Detalles florales geométricos -->
+    <div class="corner-flower top-left"></div>
+    <div class="corner-flower top-right"></div>
+    <div class="corner-flower bottom-left"></div>
+    <div class="corner-flower bottom-right"></div>
+
+    <!-- PORTADA -->
+    <div class="section">
+        <div class="monogram">M & E</div>
+        <p class="subtitle">NUESTRA BODA</p>
+        <h1>Miches & Efraín</h1>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Tenemos el honor de invitarte a celebrar nuestro enlace matrimonial.</p>
+        
+        <div class="date-box">
+            SÁBADO, 10 DE ABRIL
+        </div>
+
+        <div class="countdown" id="countdown">
+            <div class="time-card"><span id="days">00</span><small>Días</small></div>
+            <div class="time-card"><span id="hours">00</span><small>Horas</small></div>
+            <div class="time-card"><span id="minutes">00</span><small>Min</small></div>
+            <div class="time-card"><span id="seconds">00</span><small>Seg</small></div>
+        </div>
+    </div>
+
+    <!-- UBICACIONES -->
+    <div class="section">
+        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 20px;">Ubicaciones</h2>
+
+        <div class="card">
+            <h3>Ceremonia Religiosa</h3>
+            <p style="font-weight: 500; font-size: 0.9rem;">Catedral</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Horario: 17:00 hrs</p>
+            <!-- Puedes reemplazar # por el link exacto de Google Maps de la Catedral -->
+            <a href="[suspicious link removed]" target="_blank" class="btn">📍 Ver en Google Maps</a>
+        </div>
+
+        <div class="card">
+            <h3>Recepción</h3>
+            <p style="font-weight: 500; font-size: 0.9rem;">Salón de Eventos</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Horario: 19:30 hrs</p>
+            <!-- Puedes reemplazar # por el link exacto de Google Maps del Salón -->
+            <a href="[suspicious link removed]" target="_blank" class="btn">📍 Ver en Google Maps</a>
+        </div>
+    </div>
+
+    <!-- ITINERARIO -->
+    <div class="section">
+        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px;">Itinerario</h2>
+        
+        <div class="timeline">
+            <div class="item"><span class="time">16:30 hrs</span><span class="desc">Llegada de invitados a la Catedral</span></div>
+            <div class="item"><span class="time">17:00 hrs</span><span class="desc">Ceremonia Religiosa</span></div>
+            <div class="item"><span class="time">18:30 hrs</span><span class="desc">Traslado y sesión de fotos</span></div>
+            <div class="item"><span class="time">19:30 hrs</span><span class="desc">Coctel de Bienvenida en el Salón</span></div>
+            <div class="item"><span class="time">20:30 hrs</span><span class="desc">Entrada de los Novios y Primer Baile</span></div>
+            <div class="item"><span class="time">21:00 hrs</span><span class="desc">Cena Banquetera</span></div>
+            <div class="item"><span class="time">22:30 hrs</span><span class="desc">Apertura de Pista & Fiesta</span></div>
+            <div class="item"><span class="time">01:00 hrs</span><span class="desc">Mariachi y Trasnochados</span></div>
+        </div>
+    </div>
+
+    <!-- MESA DE REGALOS -->
+    <div class="section">
+        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 15px;">Mesa de Regalos</h2>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">Su presencia es nuestro mejor regalo. Si desean hacernos un obsequio, ponemos a su disposición las siguientes opciones:</p>
+
+        <div class="card" style="background: #fff; border: 1px solid #e5dccb;">
+            <p style="font-weight: 600; font-size: 0.95rem;">Liverpool</p>
+            <p style="font-size: 0.8rem; color: #666;">Evento No. <strong>50123456</strong></p>
+            <a href="[suspicious link removed]" target="_blank" class="btn" style="padding: 8px 18px; font-size: 0.75rem;">Ir a Liverpool</a>
+        </div>
+
+        <div class="card" style="background: #fff; border: 1px solid #e5dccb;">
+            <p style="font-weight: 600; font-size: 0.95rem;">Lluvia de Sobres / Transferencia</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Habrá un buzón especial el día del evento.<br><strong>CLABE:</strong> 012 180 0123456789 0<br><strong>Banco:</strong> BBVA</p>
+        </div>
+    </div>
+
+    <!-- CÓDIGO DE VESTIMENTA -->
+    <div class="section">
+        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 10px;">Código de Vestimenta</h2>
+        <p style="font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">ETIQUETA FORMAL</p>
+
+        <a href="[suspicious link removed]" target="_blank" class="btn" style="background-color: #7a6352; margin-bottom: 15px;">👗 Inspiración de Vestidos</a>
+
+        <div class="alert-box">
+            <strong>⚠️ Recordatorio Importante:</strong><br>
+            Agradecemos evitar vestir en tonos <strong>blanco, hueso, marfil, crema, champagne claro</strong> o sus derivados. Estos colores están reservados para la novia.
+        </div>
+
+        <p style="font-size: 0.8rem; color: #555; margin-top: 15px;">Sugerencias de paleta de colores:</p>
+        <div class="palette">
+            <div class="color-circle" style="background-color: #d8a7a1;" title="Palo de Rosa"></div>
+            <div class="color-circle" style="background-color: #556b2f;" title="Verde Olivo"></div>
+            <div class="color-circle" style="background-color: #c86d51;" title="Terracota"></div>
+            <div class="color-circle" style="background-color: #1b2a4a;" title="Azul Noche"></div>
+        </div>
+    </div>
+
+    <!-- RSVP / WhatsApp -->
+    <div class="section" style="border-bottom: none;">
+        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--primary); margin-bottom: 10px;">Confirmación de Asistencia</h2>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 20px;">Por favor confirma tu asistencia antes del 15 de Marzo.</p>
+
+        <!-- Reemplaza el enlace si deseas poner un número específico, por ejemplo: [suspicious link removed]... -->
+        <a href="[suspicious link removed]." target="_blank" class="btn btn-whatsapp">
+            📲 Confirmar por WhatsApp
+        </a>
+    </div>
+
+    <footer>
+        <p>Con amor, Miches & Efraín ❤️</p>
+    </footer>
+</div>
+
+<script>
+    // Cuenta Regresiva para el 10 de Abril
+    const targetDate = new Date("April 10, 2027 17:00:00").getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference > 0) {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
